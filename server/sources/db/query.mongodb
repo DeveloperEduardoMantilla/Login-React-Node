@@ -1,0 +1,32 @@
+use("login_react")
+
+db.createCollection('usuario', {
+    validator:{
+        $jsonSchema:{
+            bsonType:'object',
+            required:["_id","usuario","password","ultimo_ingreso","permiso"],
+            properties:{
+                _id:{
+                    bsonType:"int",
+                    description:"El campo _id debe ser de tipo int"
+                },
+                usuario:{
+                    bsonType:"string",
+                    description:"El campo usuario debe ser de tipo string"
+                },
+                password:{
+                    bsonType:"string",
+                    description:"El campo password debe ser de tipo string",
+                },
+                ultimo_ingreso:{
+                    bsonType:"string",
+                    description:"El campo ultimo_ingreso debe ser de tipo string"
+                },
+                permiso:{
+                    bsonType:"string",
+                    description:"El campo permiso debe ser de tipo string"
+                }
+            }
+        }
+    }
+});
