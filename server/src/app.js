@@ -1,10 +1,13 @@
 import express from 'express';
 import dotenv from 'dotenv';
+import usuario from './routers/login.js';
+
 
 dotenv.config();
 let appExpress = express();
 
 appExpress.use(express.json());
+appExpress.use("/validateUsuario", usuario);
 
 appExpress.use("/",(req,res)=>{
     res.json({status:"404",message:"Hola Crack, te cuento que no haz establecido una ruta valida."})
