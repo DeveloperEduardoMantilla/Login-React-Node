@@ -10,7 +10,7 @@ appExpress.use(express.json());
 appExpress.use("/validateUsuario", usuario);
 
 appExpress.use("/",(req,res)=>{
-    res.json({status:"404",message:"Hola Crack, te cuento que no haz establecido una ruta valida."})
+    res.status(404).json({status:"404",message:"Hola Crack, te cuento que no haz establecido una ruta valida."})
 })
 
 let config = JSON.parse(process.env.MY_SERVER)

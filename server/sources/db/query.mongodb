@@ -4,7 +4,7 @@ db.createCollection('usuario', {
     validator:{
         $jsonSchema:{
             bsonType:'object',
-            required:["_id","usuario","password","ultimo_ingreso","permiso"],
+            required:["_id","usuario","password","rol"],
             properties:{
                 _id:{
                     bsonType:"int",
@@ -18,13 +18,9 @@ db.createCollection('usuario', {
                     bsonType:"string",
                     description:"El campo password debe ser de tipo string",
                 },
-                ultimo_ingreso:{
+                rol:{
                     bsonType:"string",
-                    description:"El campo ultimo_ingreso debe ser de tipo string"
-                },
-                permiso:{
-                    bsonType:"string",
-                    description:"El campo permiso debe ser de tipo string"
+                    description:"El campo rol debe ser de tipo string"
                 }
             }
         }
