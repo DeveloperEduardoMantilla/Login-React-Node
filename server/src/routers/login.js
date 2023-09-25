@@ -9,6 +9,6 @@ const version = routesVersioning();
 
 appLogin.use(limitApi())
 
-appLogin.get("/",dtoLogin, validateLogin, version(loginUsuario));
+appLogin.post("/",dtoLogin, validateLogin, version(loginUsuario));
 
 export default appLogin; 

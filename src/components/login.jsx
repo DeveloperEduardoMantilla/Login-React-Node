@@ -10,6 +10,7 @@ function App() {
   
   let navigate = useNavigate();
     const [LoggedIn, setLoggedIn] = useState(false);
+    
     const formik = useFormik({
         initialValues: {
             user: '',
@@ -19,7 +20,7 @@ function App() {
         onSubmit: async (values) => {
             try {
                 let request = await (await fetch(`http://127.0.0.1:5015/validateUsuario`, {
-                    method: "GET",
+                    method: "POST",
                     body: JSON.stringify(values),
                     headers: {
                         "Content-Type": "application/json"
@@ -28,12 +29,19 @@ function App() {
     
                 if(request.status >= 400) {
                      Swal.fire({
-                        title: "Ops!, ha ocurrido un error",
+                        title: "Ops!",
                         icon: "error",
                         text: request.message
                     })
                     return setLoggedIn(false)
+                }else if (request.message === "Usuario/Contraseña incorrecto"){
+                  Swal.fire({
+                    title: "Ops!",
+                    icon: "error",
+                    text: "Usuario/Contraseña incorrecto"
+                })
                 }else {
+                    console.log(request);
                     let headers = request.headers; 
                     let token = headers["X-Authorization"];
                     localStorage.setItem("auth", JSON.stringify(token));    // ref in frontend
@@ -49,7 +57,7 @@ function App() {
     if(formik.isSubmitting && Object.values(formik.errors).length > 0) {
         for(let prop in formik.errors) {
             Swal.fire({
-                title: "Ops!, ha ocurrido un error",
+                title: "Ops!",
                 icon: "error",
                 text: `${formik.errors[prop]}`
             })
@@ -67,16 +75,14 @@ function App() {
           <div className="img">
             <img src={logo} alt="" />
           </div>
-          <div className="form">
+          <form className="form" onSubmit={formik.handleSubmit}>
             <div className="titulo">
               <h1>Login</h1>
             </div>
-            <form action="" onSubmit={formik.handleSubmit}>
               <input type="text"  value={formik.values.user} onChange={formik.handleChange} name='user' placeholder='User' />
               <input type="password" value={formik.values.password} onChange={formik.handleChange} placeholder='password' name='password'/>
               <button className='btn btn-color' type='submit' disabled={formik.isSubmitting}>Enviar</button>
-            </form>
-          </div>
+          </form>
         </div>
       </div>
     </>

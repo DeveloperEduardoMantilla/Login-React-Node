@@ -1,11 +1,11 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import usuario from './routers/login.js';
-
+import cors from "cors";
 
 dotenv.config();
 let appExpress = express();
-
+appExpress.use(cors())
 appExpress.use(express.json());
 appExpress.use("/validateUsuario", usuario);
 
