@@ -19,7 +19,7 @@ function App() {
         validationSchema: validateLoginFrontend,
         onSubmit: async (values) => {
             try {
-                let request = await (await fetch(`http://127.0.0.1:5015/validateUsuario`, {
+                let request = await (await fetch(`http://${import.meta.env.VITE_MY_SERVER}:${import.meta.env.VITE_PORT}/validateUsuario`, {
                     method: "POST",
                     body: JSON.stringify(values),
                     headers: {
