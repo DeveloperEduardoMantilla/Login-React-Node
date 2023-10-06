@@ -26,7 +26,7 @@ function App() {
                         "Content-Type": "application/json"
                     }
                 })).json();
-    
+                console.log(request);
                 if(request.status >= 400) {
                      Swal.fire({
                         title: "Ops!",
@@ -48,7 +48,7 @@ function App() {
                     setLoggedIn(true)
                 }
             }catch(err) {
-                console.log(err)
+                console.log(err.message)
                 setLoggedIn(false)
             }
         }

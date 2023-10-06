@@ -6,7 +6,7 @@ let env = loadEnv("development",process.cwd(), "VITE")
 export default defineConfig({
   plugins: [react()],
   server:{
-  host:env.VITE_MY_SERVER,
-  port:env.VITE_PORT 
+  host:env.VITE_IP_FRONTEND,
+  port:env.VITE_PORT_FRONTEND 
  }
 })

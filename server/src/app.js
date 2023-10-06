@@ -1,12 +1,12 @@
 import express from 'express';
-import dotenv from 'dotenv';
 import usuario from './routers/login.js';
 import cors from "cors";
 import { fileURLToPath } from "url";
 import path from "path";
 
+import {loadEnv } from 'vite'
+let env = loadEnv("development", process.cwd(), "VITE")
 
-dotenv.config();
 let appExpress = express();
 
 const __filename = fileURLToPath(import.meta.url);
@@ -19,8 +19,9 @@ appExpress.use("/validateUsuario", usuario);
 
 appExpress.use(express.static(DIST_DIRECTORY));
 
+let ip=env.VITE_IP_BACKEND;
+let port=env.VITE_PORT_BACKEND;
 
-let config = JSON.parse(process.env.MY_SERVER)
-appExpress.listen(config, ()=>{
-    console.log(`http://${config.hostname}:${config.port}`)
+appExpress.listen((ip,port), ()=>{
+    console.log(`http://${ip}:${port}`)
 })
