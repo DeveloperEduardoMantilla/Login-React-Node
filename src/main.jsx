@@ -1,23 +1,17 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import Login from './components/login.jsx'
-import Dasboard from "./components/dasboard.jsx";
 import '../src/assets/css/main.css'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Login/>
-  },
-  {
-    path: "/success",
-    element: <Dasboard/>
-  } 
-])
+import { Routes, Route, BrowserRouter} from "react-router-dom";
+import Login from "./components/login.jsx"
+import Dasboard from './components/dasboard.jsx';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <RouterProvider router={router}/>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/dashboard" element={<Dasboard/>}></Route>
+        <Route path="/" element={<Login/>}></Route>
+      </Routes>
+    </BrowserRouter>
   </React.StrictMode>,
 )

@@ -19,7 +19,9 @@ function App() {
         validationSchema: validateLoginFrontend,
         onSubmit: async (values) => {
             try {
-                let request = await (await fetch(`http://${import.meta.env.VITE_MY_SERVER}:${import.meta.env.VITE_PORT}/validateUsuario`, {
+              let ruta = `http://${import.meta.env.VITE_IP_BACKEND}:${import.meta.env.VITE_PORT_BACKEND}/validateUsuario`;
+              console.log(ruta);
+                let request = await (await fetch(ruta, {
                     method: "POST",
                     body: JSON.stringify(values),
                     headers: {
@@ -65,7 +67,7 @@ function App() {
     }
 
   if(LoggedIn) {
-    return navigate("/success")
+    return navigate("/dashboard")
   }
 
   return (
